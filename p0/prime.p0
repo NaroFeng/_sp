@@ -1,0 +1,14 @@
+func is_prime(n) {
+    if (n < 2) {
+        return 0;
+    }
+    i = 2;
+    while (i * i < n) {
+        if (n - (n / i) * i == 0) {
+            return 0;
+        }
+        i = i + 1;
+    }
+    return 1;
+}
+result = is_prime(17);
