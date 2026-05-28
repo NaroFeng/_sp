@@ -1,25 +1,45 @@
 # AGENTS.md
 
-## p0 Compiler Project (260311compiler)
+## 260311compiler - Compiler Learning Project
 
-### Build & Run
-```bash
-gcc -o compiler compiler.c && ./compiler <source.p0>
+### Structure
+
+```
+260311compiler/
+├── interpreter/     # Interpreter tutorial (Level 1-5)
+│   └── level{1,2,3,4,5}/
+└── compiler/       # Compiler tutorial (Level 1-5)
+    └── level{1,2,3,4,5}/
 ```
 
-### p0 Language
-- Test files: `p0/*.p0`
-- Supports: `func`, `if`, `while`, arithmetic (`+`, `-`, `*`, `/`), comparisons (`==`, `<`, `>`), `return`
-- Semicolons are optional after assignments and returns
-- Comments: `// ...` and `/* ... */`
+### Build & Run
 
-### Architecture
-- `compiler.c`: Single-file compiler with Lexer, Parser, IR emitter, and VM
-- IR output shows quadruples (op, arg1, arg2, result) during compilation
-- VM executes in `vm()` and prints final variable values
+```bash
+# Interpreter Level 5
+gcc interpreter/level5/level5_calc.c -o calc && ./calc
 
-### Language Spec
-- **Type system**: Strong (integers only)
-- **Compilation**: Compiles to stack-based bytecode
-- **Execution**: Virtual machine (stack-based)
-- **Memory management**: Manual (no GC)
+# Compiler Levels
+gcc compiler/level2/level2_compiler.c -o level2 && ./level2
+gcc compiler/level3/level3_variables.c -o level3 && ./level3
+gcc compiler/level4/level4_control_flow.c -o level4 && ./level4
+gcc compiler/level5/level5_functions.c -o level5 && ./level5
+```
+
+### Compiler Levels
+
+| Level | File | Feature | Test |
+|-------|------|---------|------|
+| 2 | level2_compiler.c | Basic ops (+ - * /) | 1+2*3=7 ✓ |
+| 3 | level3_variables.c | Variables | x=5,y=3,x+y ✓ |
+| 4 | level4_control_flow.c | while loop | x=3 ✓ |
+| 5 | level5_functions.c | Bytecode demo | 5+3=8 ✓ |
+
+### Bytecode Opcodes
+
+| Op | Description |
+|----|-------------|
+| IMM | Load immediate value |
+| ADD/SUB/MUL/DIV | Arithmetic |
+| LOAD/STORE | Variable access |
+| CMP_LT/GT/EQ | Comparison |
+| JMP/JMP_FALSE | Branch |
